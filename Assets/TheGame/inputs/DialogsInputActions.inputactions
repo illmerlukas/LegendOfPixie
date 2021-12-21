@@ -1,0 +1,45 @@
+{
+    "name": "DialogsInputActions",
+    "maps": [
+        {
+            "name": "Dialog",
+            "id": "5b3bc4e0-5b68-4f40-88be-9eb4917903f9",
+            "actions": [
+                {
+                    "name": "Restart",
+                    "type": "Button",
+                    "id": "07d9f19b-9f78-4fe6-be32-11ac726f114a",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "8741091b-88ee-463e-82ea-c62cb416f8fc",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Restart",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1c00d186-5ccc-43df-b31a-b96ac1594124",
+                    "path": "<DualShockGamepad>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Restart",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
