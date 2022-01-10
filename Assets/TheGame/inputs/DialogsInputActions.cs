@@ -35,6 +35,15 @@ public partial class @DialogsInputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""OpenStartMenu"",
+                    ""type"": ""Button"",
+                    ""id"": ""207cbacd-2a71-4939-aae0-a63bf0590f1c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -59,6 +68,28 @@ public partial class @DialogsInputActions : IInputActionCollection2, IDisposable
                     ""action"": ""Restart"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""554fc10b-fddb-4de4-b299-7b9cc1b8e5e4"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""OpenStartMenu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""88218a8e-5dbe-41d0-b132-29a74d2073fe"",
+                    ""path"": ""<DualShockGamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""OpenStartMenu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -68,6 +99,7 @@ public partial class @DialogsInputActions : IInputActionCollection2, IDisposable
         // Dialog
         m_Dialog = asset.FindActionMap("Dialog", throwIfNotFound: true);
         m_Dialog_Restart = m_Dialog.FindAction("Restart", throwIfNotFound: true);
+        m_Dialog_OpenStartMenu = m_Dialog.FindAction("OpenStartMenu", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -128,11 +160,13 @@ public partial class @DialogsInputActions : IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Dialog;
     private IDialogActions m_DialogActionsCallbackInterface;
     private readonly InputAction m_Dialog_Restart;
+    private readonly InputAction m_Dialog_OpenStartMenu;
     public struct DialogActions
     {
         private @DialogsInputActions m_Wrapper;
         public DialogActions(@DialogsInputActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @Restart => m_Wrapper.m_Dialog_Restart;
+        public InputAction @OpenStartMenu => m_Wrapper.m_Dialog_OpenStartMenu;
         public InputActionMap Get() { return m_Wrapper.m_Dialog; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -145,6 +179,9 @@ public partial class @DialogsInputActions : IInputActionCollection2, IDisposable
                 @Restart.started -= m_Wrapper.m_DialogActionsCallbackInterface.OnRestart;
                 @Restart.performed -= m_Wrapper.m_DialogActionsCallbackInterface.OnRestart;
                 @Restart.canceled -= m_Wrapper.m_DialogActionsCallbackInterface.OnRestart;
+                @OpenStartMenu.started -= m_Wrapper.m_DialogActionsCallbackInterface.OnOpenStartMenu;
+                @OpenStartMenu.performed -= m_Wrapper.m_DialogActionsCallbackInterface.OnOpenStartMenu;
+                @OpenStartMenu.canceled -= m_Wrapper.m_DialogActionsCallbackInterface.OnOpenStartMenu;
             }
             m_Wrapper.m_DialogActionsCallbackInterface = instance;
             if (instance != null)
@@ -152,6 +189,9 @@ public partial class @DialogsInputActions : IInputActionCollection2, IDisposable
                 @Restart.started += instance.OnRestart;
                 @Restart.performed += instance.OnRestart;
                 @Restart.canceled += instance.OnRestart;
+                @OpenStartMenu.started += instance.OnOpenStartMenu;
+                @OpenStartMenu.performed += instance.OnOpenStartMenu;
+                @OpenStartMenu.canceled += instance.OnOpenStartMenu;
             }
         }
     }
@@ -159,5 +199,6 @@ public partial class @DialogsInputActions : IInputActionCollection2, IDisposable
     public interface IDialogActions
     {
         void OnRestart(InputAction.CallbackContext context);
+        void OnOpenStartMenu(InputAction.CallbackContext context);
     }
 }

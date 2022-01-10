@@ -11,6 +11,7 @@ public class DialogsInputController : MonoBehaviour
 {
     private DialogsRenderer dialogsRenderer;
     private bool restartScene = false;
+    private bool openStartMenu = false;
 
     protected void Awake()
     {
@@ -22,21 +23,34 @@ public class DialogsInputController : MonoBehaviour
         restartScene = true;
     }
 
+    private void OnOpenStartMenu()
+    {
+        openStartMenu = true;
+    }
+
     /// <summary>
     /// Update is called once per frame
     /// </summary>
     protected void Update()
     {
-        Debug.Log("restartScene " + restartScene);
-        if (restartScene)
+        if (restartScene) 
         {
-            if (dialogsRenderer.gameOverDialog.activeInHierarchy)
+            Debug.Log(dialogsRenderer.gameOverDialog.activeInHierarchy);
+            if (dialogsRenderer.gameOverDialog.activeInHierarchy) // game over 
             {
                 SaveGameData.current = new SaveGameData();
                 Time.timeScale = 1f;
                 SceneManager.LoadScene(SceneManager.GetActiveScene().name);
             }
-            
+        }
+
+        if (openStartMenu)
+        {
+            if (!dialogsRenderer.gameOverDialog.activeInHierarchy)
+            {
+                dialogsRenderer.togglePause();
+                openStartMenu = false;
+            }
         }
     }
 }

@@ -21,6 +21,9 @@ public class PlayerInputController : MonoBehaviour
 
     private void Update()
     {
+        if (Time.timeScale < 1f) // blockiere inputs falls das Spiel pausiert ist
+            return;
+
         if (inputVector.x != 0)
         {
             inputVector.y = 0;
