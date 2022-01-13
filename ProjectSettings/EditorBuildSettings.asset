@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/TheGame/levels/startmenu.unity
     guid: 72046cd9ff4524b4cacf7186aec3dc36
+  - enabled: 1
+    path: Assets/TheGame/levels/endcredits.unity
+    guid: f2f25dd45cc7fd847ba527c5f2b14e73
   m_configObjects: {}
