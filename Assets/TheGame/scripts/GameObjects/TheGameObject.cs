@@ -183,7 +183,7 @@ public class TheGameObject : MonoBehaviour
     /// Lässt die Figur times mal blinken
     /// </summary>
     /// <param name="times">Anzahl wie oft die Figur blinken soll.</param>
-    public void flicker(int times, Color color)
+    public virtual void flicker(int times, Color color)
     {
         StartCoroutine(animateFlicker(times, color));
     }

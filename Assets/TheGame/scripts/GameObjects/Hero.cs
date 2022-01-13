@@ -19,11 +19,17 @@ public class Hero : TheGameObject
     /// </summary>
     public RuntimeAnimatorController shieldSkin;
 
+    /// <summary>
+    /// Sound, der beim Tod abgespielt wird.
+    /// Dieser Sound ignoriert die AudioListener-Pause
+    /// </summary>
+    public AudioSource deathSound;
     protected override void Awake()
     {
         base.Awake();
         triggerContactFilter = new ContactFilter2D();
         triggerContactFilter.useTriggers = true; //Trigger-Collider auch erkennen!
+        deathSound.ignoreListenerPause = true;
     }
     private void Update()
     {
@@ -51,6 +57,7 @@ public class Hero : TheGameObject
             anim.updateMode = AnimatorUpdateMode.UnscaledTime; // hero-animator soll time.timeScale ignorieren, damit die sterbe-animation läuft
             GetComponent<PlayerInputController>().enabled = false;
             Time.timeScale = 0f; // spiel pausieren
+            AudioListener.pause = true;
         }
     }
 
@@ -132,5 +139,16 @@ public class Hero : TheGameObject
     {
         anim.enabled = true;
         AnimationEventDelegate.whenTimelineEventReached -= resetSkin;
+    }
+
+    /// <summary>
+    /// Sound, der abgespielt wird, wenn der Spieler verletzt wird.
+    /// </summary>
+    public AudioSource hitSound;
+
+    public override void flicker(int times, Color color)
+    {
+        hitSound.Play();
+        base.flicker(times, color);
     }
 }

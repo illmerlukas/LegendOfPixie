@@ -40,6 +40,7 @@ public class DialogsInputController : MonoBehaviour
             {
                 SaveGameData.current = new SaveGameData();
                 Time.timeScale = 1f;
+                AudioListener.pause = false;
                 SceneManager.LoadScene(SceneManager.GetActiveScene().name);
             }
         }

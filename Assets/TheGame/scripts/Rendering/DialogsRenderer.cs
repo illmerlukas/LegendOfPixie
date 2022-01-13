@@ -62,6 +62,7 @@ public class DialogsRenderer : MonoBehaviour
         }
 
         blackness.SetActive(pauseInfo.activeSelf);
+        AudioListener.pause = pauseInfo.activeSelf;
     }
 
     /// <summary>
@@ -70,6 +71,7 @@ public class DialogsRenderer : MonoBehaviour
     public void onBackToStartMenu()
     {
         Time.timeScale = 1f; // Zeit fortsetzen
+        AudioListener.pause = false; // Sounds fortsetzen
         SceneManager.LoadScene("StartMenu");
     }
 

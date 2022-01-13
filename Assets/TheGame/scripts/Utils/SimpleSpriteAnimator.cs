@@ -28,6 +28,11 @@ public class SimpleSpriteAnimator : MonoBehaviour
     /// </summary>
     public bool destroyObject = false;
 
+    /// <summary>
+    /// Soundeffekt, der zu Beginn der Animation startet
+    /// </summary>
+    public AudioSource sound = null;
+
     // Use this for initialization
     private void Start() {}
 
@@ -37,6 +42,9 @@ public class SimpleSpriteAnimator : MonoBehaviour
     }
     protected IEnumerator playAni()
     {
+        if (sound != null)
+            sound.Play();
+
         SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
 
         do {

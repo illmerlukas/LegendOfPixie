@@ -6,10 +6,15 @@ using UnityEngine;
 /// Basis-Klasse für alle Szenenobjekte, die beim Darüberlaufen
 /// benachrichtig werden wollen.
 /// </summary>
-
 [RequireComponent(typeof(BoxCollider2D))]
 public class Collectable : MonoBehaviour
 {
+    /// <summary>
+    /// Der Sound, der beim Einsammeln abgespielt wird,
+    /// sofern ein Clip gesetzt ist.
+    /// </summary>
+    public AudioClip collectSound;
+
     protected virtual void Awake()
     {
         if (!GetComponent<BoxCollider2D>().isTrigger)
@@ -23,6 +28,7 @@ public class Collectable : MonoBehaviour
     /// </summary>
     public virtual void OnCollect()
     {
-        //leer
+        if (collectSound != null)
+            AudioSource.PlayClipAtPoint(collectSound, Vector3.zero);
     }
 }
